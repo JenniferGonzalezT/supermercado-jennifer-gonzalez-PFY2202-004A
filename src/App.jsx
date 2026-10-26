@@ -8,7 +8,8 @@ import Footer from './components/Footer';
 function App() {
   return (
     // Router envuelve toda la aplicación para habilitar el enrutamiento
-    <Router>
+    // Agregamos el basename para que reconozca la URL de GitHub Pages
+    <Router basename="/supermercado-jennifer-gonzalez-PFY2202-004A/">
       {/* Navbar y Footer quedan fuera de Routes para que se muestren en todas las pantallas */}
       <Navbar />
       
