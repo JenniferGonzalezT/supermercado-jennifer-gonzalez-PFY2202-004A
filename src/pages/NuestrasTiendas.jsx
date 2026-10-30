@@ -1,48 +1,49 @@
+import { useState, useEffect } from 'react';
+import SucursalCard from '../components/SucursalCard';
+
 export default function NuestrasTiendas() {
+  // Estado inicial: un arreglo vacío mientras cargan los datos
+  const [sucursales, setSucursales] = useState([]);
+  const [loading, setLoading] = useState(true); // Estado extra para mostrar que está cargando
+
+  // Efecto secundario: Ejecuta la llamada a la API simulada (archivo JSON) al montar el componente
+  useEffect(() => {
+    fetch('data/sucursales.json')
+      .then((response) => response.json())
+      .then((data) => {
+        setSucursales(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error al cargar las sucursales:", error);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="max-w-6xl mx-auto px-4 mt-12 mb-12">
       <h2 className="text-3xl font-bold text-color-oscuro mb-4">Nuestras Tiendas</h2>
-      <p className="text-lg text-gray-600 mb-8">
+      <p className="text-lg text-gray-600 mb-8 text-justify">
         Conoce las ubicaciones de nuestras principales sucursales y centros de distribución:
       </p>
       
-      {/* Grilla responsiva: 1 columna en celulares, 3 columnas en pantallas medianas/grandes */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        {/* Tarjeta 1 */}
-        <div className="bg-white rounded-xl shadow-md p-6 flex flex-col h-full hover:-translate-y-1 hover:shadow-lg transition-all">
-          <h5 className="text-xl font-bold text-color-oscuro mb-2">Sucursal Central</h5>
-          <p className="text-gray-600 mb-4 flex-grow">Av. Principal 123, Santiago.</p>
-          <div className="mt-auto">
-            <span className="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-              Inventario Actualizado
-            </span>
-          </div>
+      {loading ? (
+        <div className="text-center text-gray-500 py-10">
+          Cargando información de sucursales...
         </div>
-
-        {/* Tarjeta 2 */}
-        <div className="bg-white rounded-xl shadow-md p-6 flex flex-col h-full hover:-translate-y-1 hover:shadow-lg transition-all">
-          <h5 className="text-xl font-bold text-color-oscuro mb-2">Sucursal Norte</h5>
-          <p className="text-gray-600 mb-4 flex-grow">Av. Los Héroes 456, Antofagasta.</p>
-          <div className="mt-auto">
-            <span className="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
-              Revisión de Stock Pendiente
-            </span>
-          </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {sucursales.map((sucursal) => (
+            <SucursalCard 
+              key={sucursal.id}
+              nombre={sucursal.nombre}
+              direccion={sucursal.direccion}
+              estado={sucursal.estado}
+              estadoClase={sucursal.estadoClase}
+            />
+          ))}
         </div>
-
-        {/* Tarjeta 3 */}
-        <div className="bg-white rounded-xl shadow-md p-6 flex flex-col h-full hover:-translate-y-1 hover:shadow-lg transition-all">
-          <h5 className="text-xl font-bold text-color-oscuro mb-2">Sucursal Sur</h5>
-          <p className="text-gray-600 mb-4 flex-grow">Calle Las Rosas 789, Concepción.</p>
-          <div className="mt-auto">
-            <span className="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-              Inventario Actualizado
-            </span>
-          </div>
-        </div>
-
-      </div>
+      )}
     </div>
   );
 }
