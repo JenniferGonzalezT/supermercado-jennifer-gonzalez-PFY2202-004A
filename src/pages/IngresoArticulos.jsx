@@ -38,7 +38,7 @@ export default function IngresoArticulos() {
       tipo 
     });
 
-    // 3. Mostrar éxito y resetear formulario
+    // Mostrar éxito y resetear formulario
     setExito(true);
     setNombre('');
     setMarca('');
