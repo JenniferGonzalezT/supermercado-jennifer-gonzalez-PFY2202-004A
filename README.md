@@ -2,47 +2,79 @@
 
 ## 📎 Descripción
 
-Este proyecto es una aplicación web SPA (Single Page Application) desarrollada para la evaluación de la Semana 1 de la asignatura Desarrollo Frontend II. Simula el sistema central de inventario de una cadena de supermercados, permitiendo una navegación fluida entre diferentes pantallas sin recargar la página en el navegador.
+Este proyecto es una aplicación web SPA (Single Page Application) desarrollada para la evaluación de la Semana 2 de la asignatura Desarrollo Frontend II. Simula el sistema central de inventario y sucursales de una cadena de supermercados. El proyecto ha evolucionado para incorporar estándares de calidad de la industria, incluyendo gestión de estado global, consumo asíncrono de datos, seguridad de formularios y una arquitectura altamente modular.
 
 
 ## 🚀 Características Principales
 
-- **Navegación Dinámica:** Implementación de `react-router-dom` para una experiencia de usuario rápida y sin recargas.
+- **Gestión de Estado Avanzada:** Implementación combinada de Context API y `useReducer` (con lógica de reducción desacoplada) para manejar el inventario de forma global, predecible y escalable.
 
-- **Diseño Responsivo:** Uso de Bootstrap para adaptar la interfaz a dispositivos móviles (incluyendo un menú hamburguesa completamente funcional).
+- **Consumo de API Simulado (Data Fetching):** Carga dinámica de sucursales y productos iniciales consumiendo archivos JSON externos mediante el hook `useEffect` y Promesas.
 
-- **Estilos Personalizados:** Interfaz moderna con una paleta de colores personalizada basada en tonos esmeralda y retroalimentación visual en el menú de navegación (Active Links).
+- **Arquitectura de Seguridad y UX:** 
+  - Validaciones estrictas con Expresiones Regulares (Regex) para prevenir inyecciones de código (XSS).
+
+  - Manejo de fugas de memoria mediante `AbortController` en las peticiones de red.
+
+  - Generación de identificadores únicos irrompibles con `crypto.randomUUID()`.
+  
+  - Estados visuales de carga (Spinners) y manejo de errores con botones de reintento.
+
+- **Enrutamiento Centralizado:** Navegación fluida y sin recargas con `react-router-dom`, utilizando un archivo de configuración central (`routes.config.jsx`) para evitar la duplicación de *paths* y manejar rutas inexistentes (Página 404).
+
+- **Diseño UI/UX Responsivo:** Migración total a **Tailwind CSS** (reemplazando Bootstrap), implementando *Tree-shaking* (purga de CSS), paleta de colores personalizada, menús colapsables y *badges* dinámicos para resaltar visualmente los nuevos ingresos en la sesión actual.
 
 
 ## 🛠️ Tecnologías Utilizadas
 
-- React
+- **Core:** React (Hooks: `useState`, `useEffect`, `useContext`, `useReducer`)
 
-- Vite
+- **Build Tool:** Vite
 
-- React Router DOM
+- **Navegación:** React Router DOM v7
 
-- Bootstrap 5
+- **Estilos:** Tailwind CSS
 
 
 ## 📂 Estructura del Proyecto
 ```
 supermercado-jennifer-gonzalez-PFY2202-004A/
+├── public/
+│   └── data/
+│       ├── productos.json       # API simulada de inventario inicial
+│       └── sucursales.json      # API simulada de tiendas
 ├── src/
 │   ├── components/
 │   │   ├── Footer.jsx
-│   │   └── Navbar.jsx
+│   │   ├── Navbar.jsx
+│   │   └── SucursalCard.jsx     # Componente UI reutilizable
+│   ├── context/
+│   │   ├── InventoryContext.jsx
+│   │   └── InventoryProvider.jsx # Proveedor global del estado
 │   ├── pages/
 │   │   ├── Home.jsx
-│   │   ├── NuestrasTiendas.jsx
+│   │   ├── IngresoArticulos.jsx # Formulario controlado con validaciones
+│   │   ├── Inventario.jsx       # Tabla dinámica de productos
+│   │   ├── NotFound.jsx         # Ruta comodín (404)
+│   │   ├── NuestrasTiendas.jsx  # Fetch de datos con manejo de errores
 │   │   └── QuienesSomos.jsx
-│   ├── App.jsx
-│   ├── index.css
+│   ├── reducers/
+│   │   └── inventoryReducer.js  # Lógica de estado desacoplada
+│   ├── routes/
+│   │   └── routes.config.jsx    # Configuración centralizada de navegación
+│   ├── util/
+│   │   └── validators.js        # Validaciones de seguridad (Regex y sanitización)
+│   ├── App.jsx                  # Contenedor principal y Router (basename)
+│   ├── index.css                # Directivas base de Tailwind
 │   └── main.jsx
+├── eslint.config.js
 ├── index.html
+├── package-lock.json
 ├── package.json
-├── vite.config.js
-└── README.md
+├── postcss.config.js
+├── README.md
+├── tailwind.config.js           # Configuración de colores personalizados y Safelist
+└── vite.config.js               # Configuración de base URL para GitHub Pages
 ```
 
 
