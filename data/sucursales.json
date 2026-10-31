@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sucursal Central",
+    "direccion": "Av. Principal 123, Santiago",
+    "telefono": "+56 2 2345 6789",
+    "horario": "Lun - Dom: 08:00 - 22:00",
+    "imagen": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=500&q=80",
+    "estado": "Inventario Actualizado",
+    "estadoClase": "bg-green-100 text-green-800"
+  },
+  {
+    "id": 2,
+    "nombre": "Sucursal Norte",
+    "direccion": "Av. Los Héroes 456, Antofagasta",
+    "telefono": "+56 5 5234 5678",
+    "horario": "Lun - Sab: 09:00 - 21:00",
+    "imagen": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80",
+    "estado": "Revisión de Stock Pendiente",
+    "estadoClase": "bg-yellow-100 text-yellow-800"
+  },
+  {
+    "id": 3,
+    "nombre": "Sucursal Sur",
+    "direccion": "Calle Las Rosas 789, Concepción",
+    "telefono": "+56 4 1234 5678",
+    "horario": "Lun - Dom: 08:30 - 21:30",
+    "imagen": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=500&q=80",
+    "estado": "Inventario Actualizado",
+    "estadoClase": "bg-green-100 text-green-800"
+  }
+]
