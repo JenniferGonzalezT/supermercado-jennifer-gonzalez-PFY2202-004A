@@ -7,8 +7,8 @@ import { rutasNavegacion } from './routes/routes.config';
 
 function App() {
   return (
-    <InventoryProvider>
-      <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={import.meta.env.BASE_URL}>
+      <InventoryProvider>
         <Navbar />
         
         <main className="pb-20"> 
@@ -24,8 +24,8 @@ function App() {
         </main>
 
         <Footer />
-      </Router>
-    </InventoryProvider>
+      </InventoryProvider>
+    </Router>
   );
 }
 
