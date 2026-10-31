@@ -1,15 +1,18 @@
 import { useReducer, useEffect } from 'react';
 import { InventoryContext } from './InventoryContext';
 
-// Estado inicial: Lista vacía
+// Estado inicial: Lista vacía e indicadores de carga y error
 const initialState = {
-  products: []
+  products: [],
+  loading: true,
+  error: null
 };
 
 // Definir las acciones
 const ACTIONS = {
   ADD_PRODUCT: 'ADD_PRODUCT',
-  LOAD_PRODUCTS: 'LOAD_PRODUCTS'
+  LOAD_PRODUCTS: 'LOAD_PRODUCTS',
+  SET_ERROR: 'SET_ERROR'
 };
 
 // Reducer: Decide cómo cambia el estado según la acción
@@ -23,7 +26,15 @@ function inventoryReducer(state, action) {
     case ACTIONS.LOAD_PRODUCTS:
       return {
         ...state,
-        products: action.payload // Cargar los productos que vienen del JSON
+        products: action.payload, // Cargar los productos que vienen del JSON
+        loading: false,           // Apagar el estado de carga
+        error: null
+      };
+    case ACTIONS.SET_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload // Guardar el mensaje de error
       };
     default:
       return state;
@@ -37,11 +48,16 @@ export function InventoryProvider({ children }) {
   // useEffect para simular la llamada a la API al cargar la aplicación
   useEffect(() => {
     fetch('data/productos.json')
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error("No se pudo conectar con el servidor de inventario");
+        return response.json();
+      })
       .then((data) => {
         dispatch({ type: ACTIONS.LOAD_PRODUCTS, payload: data });
       })
-      .catch((error) => console.error("Error al cargar el inventario:", error));
+      .catch((error) => {
+        dispatch({ type: ACTIONS.SET_ERROR, payload: error.message });
+      });
   }, []);
 
   // Función de ayuda para despachar la acción más fácilmente
@@ -50,7 +66,7 @@ export function InventoryProvider({ children }) {
   };
 
   return (
-    <InventoryContext.Provider value={{ products: state.products, addProduct }}>
+    <InventoryContext.Provider value={{ state, addProduct }}>
       {children}
     </InventoryContext.Provider>
   );
