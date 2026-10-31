@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { InventoryContext } from '../context/InventoryContext';
 import { useNavigate } from 'react-router-dom';
-import { validarNuevoArticulo } from '../util/validators';
+import { validarNuevoArticulo, TIPOS_PERMITIDOS } from '../util/validators';
 
 export default function IngresoArticulos() {
   const { addProduct } = useContext(InventoryContext);
@@ -103,11 +103,11 @@ export default function IngresoArticulos() {
               required
             >
               <option value="">Seleccione un tipo...</option>
-              <option value="Abarrotes">Abarrotes</option>
-              <option value="Lácteos">Lácteos</option>
-              <option value="Bebidas">Bebidas</option>
-              <option value="Limpieza">Limpieza</option>
-              <option value="Congelados">Congelados</option>
+              {TIPOS_PERMITIDOS.map((categoria) => (
+                <option key={categoria} value={categoria}>
+                  {categoria}
+                </option>
+              ))}
             </select>
           </div>
 

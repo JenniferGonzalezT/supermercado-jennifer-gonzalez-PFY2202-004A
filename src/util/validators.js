@@ -13,6 +13,8 @@ export const esSucursalValida = (sucursal) => {
   );
 };
 
+export const TIPOS_PERMITIDOS = ["Abarrotes", "Lácteos", "Bebidas", "Limpieza", "Congelados"];
+
 export const validarNuevoArticulo = (nombre, marca, tipo) => {
   const nombreLimpio = nombre.trim();
   const marcaLimpia = marca.trim();
@@ -37,9 +39,8 @@ export const validarNuevoArticulo = (nombre, marca, tipo) => {
     return { esValido: false, mensaje: "No se permiten caracteres especiales o símbolos (como <, >, script, $, %)." };
   }
 
-  // Validar que el tipo seleccionado sea uno de los permitidos del select
-  const tiposPermitidos = ["Abarrotes", "Lácteos", "Bebidas", "Limpieza", "Congelados"];
-  if (!tiposPermitidos.includes(tipo)) {
+  // Validar que el tipo seleccionado sea uno de los permitidos
+  if (!TIPOS_PERMITIDOS.includes(tipo)) {
     return { esValido: false, mensaje: "El tipo de producto seleccionado no es válido." };
   }
 
