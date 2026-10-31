@@ -100,6 +100,9 @@ export default function NuestrasTiendas() {
             key={sucursal.id}
             nombre={sucursal.nombre}
             direccion={sucursal.direccion}
+            telefono={sucursal.telefono}
+            horario={sucursal.horario}
+            imagen={sucursal.imagen}
             estado={sucursal.estado}
             estadoClase={sucursal.estadoClase}
           />

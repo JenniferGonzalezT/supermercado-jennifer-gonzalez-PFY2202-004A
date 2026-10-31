@@ -5,6 +5,9 @@ export const esSucursalValida = (sucursal) => {
     typeof sucursal.id === 'number' &&
     typeof sucursal.nombre === 'string' &&
     typeof sucursal.direccion === 'string' &&
+    typeof sucursal.telefono === 'string' &&
+    typeof sucursal.horario === 'string' &&
+    typeof sucursal.imagen === 'string' &&
     typeof sucursal.estado === 'string' &&
     typeof sucursal.estadoClase === 'string'
   );
