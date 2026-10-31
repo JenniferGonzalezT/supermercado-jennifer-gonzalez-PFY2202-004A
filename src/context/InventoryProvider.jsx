@@ -20,7 +20,7 @@ function inventoryReducer(state, action) {
     case ACTIONS.ADD_PRODUCT:
       return {
         ...state,
-        products: [...state.products, { id: Date.now(), ...action.payload }]
+        products: [...state.products, { id: crypto.randomUUID(), ...action.payload }]
       };
     default:
       return state;
