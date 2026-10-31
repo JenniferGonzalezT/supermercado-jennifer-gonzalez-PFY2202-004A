@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { InventoryContext } from '../context/InventoryContext';
 import { useNavigate } from 'react-router-dom';
+import { validarNuevoArticulo } from '../util/validators';
 
 export default function IngresoArticulos() {
   const { addProduct } = useContext(InventoryContext);
@@ -11,28 +12,62 @@ export default function IngresoArticulos() {
   const [marca, setMarca] = useState('');
   const [tipo, setTipo] = useState('');
 
+  // Estados para alertas visuales de seguridad
+  const [error, setError] = useState('');
+  const [exito, setExito] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Limpiar alertas previas
+    setError('');
+    setExito(false);
     
-    // Validación básica
-    if (!nombre || !marca || !tipo) return;
+    // Ejecutar validación de seguridad
+    const validacion = validarNuevoArticulo(nombre, marca, tipo);
 
-    // Usar el dispatch del contexto
-    addProduct({ nombre, marca, tipo });
+    if (!validacion.esValido) {
+      setError(validacion.mensaje);
+      return;
+    }
 
-    // Limpiar los campos
+    // Si pasa la validación, enviamos los datos limpios al estado global
+    addProduct({ 
+      nombre: nombre.trim(), 
+      marca: marca.trim(), 
+      tipo 
+    });
+
+    // 3. Mostrar éxito y resetear formulario
+    setExito(true);
     setNombre('');
     setMarca('');
     setTipo('');
 
-    // Redirigimos a la tabla para ver el producto recién agregado
-    navigate('/inventario');
+    // Redirigir a la tabla después de 2.5 segundos para ver mensaje
+    setTimeout(() => {
+      navigate('/inventario');
+    }, 2500);
   };
 
   return (
-    <div className="min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-fondo-claro py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
-        <h2 className="text-2xl font-bold text-center text-color-oscuro mb-6">Ingreso de Nuevo Artículo</h2>
+        <h2 className="text-2xl font-bold text-center text-texto-oscuro mb-6">Ingreso de Nuevo Artículo</h2>
+        
+        {/* Alerta de Error */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-medium rounded-r-md">
+            {error}
+          </div>
+        )}
+
+        {/* Alerta de Éxito */}
+        {exito && (
+          <div className="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 text-sm font-medium rounded-r-md">
+            ¡Artículo agregado! Redirigiendo a inventario...
+          </div>
+        )}
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
