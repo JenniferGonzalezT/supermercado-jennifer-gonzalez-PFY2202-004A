@@ -51,9 +51,9 @@ export default function IngresoArticulos() {
   };
 
   return (
-    <div className="min-h-screen bg-fondo-claro py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
-        <h2 className="text-2xl font-bold text-center text-texto-oscuro mb-6">Ingreso de Nuevo Artículo</h2>
+        <h2 className="text-2xl font-bold text-center text-color-oscuro mb-6">Ingreso de Nuevo Artículo</h2>
         
         {/* Alerta de Error */}
         {error && (
