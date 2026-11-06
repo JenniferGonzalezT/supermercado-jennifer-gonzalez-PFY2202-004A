@@ -1,10 +1,18 @@
+import { useState } from 'react';
 import { useInventory } from '../context/InventoryContext';
+import { TIPOS_PERMITIDOS } from '../util/validators';
 
 export default function Inventario() {
-  const { state } = useInventory();
-  
-  // Extraer las variables del estado
+  const { state } = useInventory(); 
   const { products, loading, error } = state;
+
+  // Estado local para manejar el filtro seleccionado
+  const [filtroCategoria, setFiltroCategoria] = useState('Todos');
+
+  // Filtrado dinámico sin modificar los datos originales
+  const productosFiltrados = filtroCategoria === 'Todos' 
+    ? products 
+    : products.filter(product => product.tipo === filtroCategoria);
 
   return (
     <div className="min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8">
@@ -30,7 +38,27 @@ export default function Inventario() {
               </div>
             )}
 
-            {/* La tabla se renderiza siempre que no esté cargando (incluso si hay error) */}
+            {/* Controles de Filtro */}
+            <div className="mb-6 flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
+              <label htmlFor="filtro-categoria" className="font-medium text-gray-700">
+                Filtrar por Categoría:
+              </label>
+              <select 
+                id="filtro-categoria"
+                value={filtroCategoria}
+                onChange={(e) => setFiltroCategoria(e.target.value)}
+                className="ml-4 block w-64 rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
+              >
+                <option value="Todos">Todas las categorías</option>
+                {TIPOS_PERMITIDOS.map(categoria => (
+                  <option key={categoria} value={categoria}>
+                    {categoria}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Tabla renderizando productosFiltrados en lugar de products */}
             <div className="bg-white shadow-md rounded-lg overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -42,9 +70,8 @@ export default function Inventario() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {/* Validar que products exista y tenga elementos */}
-                  {products && products.length > 0 ? (
-                    products.map((product) => (
+                  {productosFiltrados && productosFiltrados.length > 0 ? (
+                    productosFiltrados.map((product) => (
                       <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -67,7 +94,7 @@ export default function Inventario() {
                   ) : (
                     <tr>
                       <td colSpan="4" className="px-6 py-8 text-center text-sm text-gray-500">
-                        No hay artículos en el inventario actual.
+                        No se encontraron artículos en esta categoría.
                       </td>
                     </tr>
                   )}
