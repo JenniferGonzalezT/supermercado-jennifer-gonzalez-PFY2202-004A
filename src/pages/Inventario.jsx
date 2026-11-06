@@ -1,9 +1,7 @@
-import { useContext } from 'react';
-import { InventoryContext } from '../context/InventoryContext';
+import { useInventory } from '../context/InventoryContext';
 
 export default function Inventario() {
-  // Consumir el objeto 'state' completo desde el contexto
-  const { state } = useContext(InventoryContext);
+  const { state } = useInventory();
   
   // Extraer las variables del estado
   const { products, loading, error } = state;

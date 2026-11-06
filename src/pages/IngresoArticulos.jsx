@@ -1,10 +1,10 @@
-import { useState, useContext } from 'react';
-import { InventoryContext } from '../context/InventoryContext';
+import { useState } from 'react';
+import { useInventory } from '../context/InventoryContext';
 import { useNavigate } from 'react-router';
 import { validarNuevoArticulo, TIPOS_PERMITIDOS } from '../util/validators';
 
 export default function IngresoArticulos() {
-  const { addProduct } = useContext(InventoryContext);
+  const { addProduct } = useInventory();
   const navigate = useNavigate();
 
   // Estados locales para los campos del formulario
