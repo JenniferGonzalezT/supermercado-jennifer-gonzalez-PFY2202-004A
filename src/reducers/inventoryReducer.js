@@ -18,7 +18,7 @@ export function inventoryReducer(state, action) {
     case ACTIONS.ADD_PRODUCT:
       return {
         ...state,
-        products: [...state.products, { id: crypto.randomUUID(), isNew: true, ...action.payload }]
+        products: [...state.products, action.payload]
       };
     case ACTIONS.LOAD_PRODUCTS:
       return {
