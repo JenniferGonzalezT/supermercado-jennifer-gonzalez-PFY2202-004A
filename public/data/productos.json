@@ -3,18 +3,21 @@
     "id": "1a2b3c", 
     "nombre": "Arroz Grado 1", 
     "marca": "Tucapel", 
-    "tipo": "Abarrotes"
+    "tipo": "Abarrotes",
+    "stock": 20
   },
   {
     "id": "4d5e6f", 
     "nombre": "Leche Descremada", 
     "marca": "Soprole", 
-    "tipo": "Lácteos" 
+    "tipo": "Lácteos",
+    "stock": 15
   },
   {
     "id": "7g8h9i", 
     "nombre": "Detergente Líquido", 
     "marca": "Omo", 
-    "tipo": "Limpieza"
+    "tipo": "Limpieza",
+    "stock": 30
   }
 ]

@@ -11,6 +11,7 @@ export default function IngresoArticulos() {
   const [nombre, setNombre] = useState('');
   const [marca, setMarca] = useState('');
   const [tipo, setTipo] = useState('');
+  const [stock, setStock] = useState(10);
 
   // Estados para alertas visuales de seguridad
   const [error, setError] = useState('');
@@ -24,7 +25,7 @@ export default function IngresoArticulos() {
     setExito(false);
     
     // Ejecutar validación de seguridad
-    const validacion = validarNuevoArticulo(nombre, marca, tipo);
+    const validacion = validarNuevoArticulo(nombre, marca, tipo, stock);
 
     if (!validacion.esValido) {
       setError(validacion.mensaje);
@@ -35,7 +36,8 @@ export default function IngresoArticulos() {
     addProduct({ 
       nombre: nombre.trim(), 
       marca: marca.trim(), 
-      tipo 
+      tipo,
+      stock
     });
 
     // Mostrar éxito y resetear formulario
@@ -43,6 +45,7 @@ export default function IngresoArticulos() {
     setNombre('');
     setMarca('');
     setTipo('');
+    setStock(10);
 
     // Redirigir a la tabla después de 2.5 segundos para ver mensaje
     setTimeout(() => {
@@ -90,6 +93,18 @@ export default function IngresoArticulos() {
               onChange={(e) => setMarca(e.target.value)}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
               placeholder="Ej. Tucapel"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Stock Inicial</label>
+            <input
+              type="number"
+              value={stock}
+              onChange={(e) => setStock(Number(e.target.value))}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
+              min="0"
               required
             />
           </div>

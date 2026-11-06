@@ -15,13 +15,18 @@ export const esSucursalValida = (sucursal) => {
 
 export const TIPOS_PERMITIDOS = ["Abarrotes", "Lácteos", "Bebidas", "Limpieza", "Congelados"];
 
-export const validarNuevoArticulo = (nombre, marca, tipo) => {
+export const validarNuevoArticulo = (nombre, marca, tipo, stock) => {
   const nombreLimpio = nombre.trim();
   const marcaLimpia = marca.trim();
 
   // Evitar campos vacíos o solo con espacios
   if (!nombreLimpio || !marcaLimpia || !tipo) {
-    return { esValido: false, mensaje: "Todos los campos son obligatorios y no pueden estar vacíos." };
+    return { esValido: false, mensaje: "Todos los campos de texto son obligatorios y no pueden estar vacíos." };
+  }
+
+  // Validar que el stock sea un número válido mayor o igual a cero
+  if (stock === '' || stock < 0 || isNaN(stock)) {
+    return { esValido: false, mensaje: "El stock debe ser un número válido mayor o igual a 0." };
   }
 
   // Limitar longitudes para prevenir desbordamientos
