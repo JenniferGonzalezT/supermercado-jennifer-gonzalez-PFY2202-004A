@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { InventoryContext } from '../context/InventoryContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { validarNuevoArticulo, TIPOS_PERMITIDOS } from '../util/validators';
 
 export default function IngresoArticulos() {
