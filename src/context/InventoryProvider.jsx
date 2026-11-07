@@ -13,7 +13,7 @@ export function InventoryProvider({ children }) {
 
   // useEffect para simular la llamada a la API al cargar la aplicación
   useEffect(() => {
-    fetch('data/productos.json')
+    fetch(`${import.meta.env.BASE_URL}data/productos.json`)
       .then((response) => {
         if (!response.ok) throw new Error("No se pudo conectar con el servidor");
         return response.json();
