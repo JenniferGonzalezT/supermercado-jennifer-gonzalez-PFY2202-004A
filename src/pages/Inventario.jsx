@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { useInventory } from '../context/InventoryContext';
+import Spinner from '../components/Spinner';
 import { TIPOS_PERMITIDOS, CATEGORIA_TODOS } from '../util/validators';
 
 export default function Inventario() {
@@ -24,10 +25,7 @@ export default function Inventario() {
 
         {/* Estado de carga: Muestra un spinner mientras fetch hace su trabajo */}
         {loading ? (
-          <div className="text-center py-10">
-            <div className="spinner"></div>
-            <p className="text-gray-600 font-semibold">Cargando inventario...</p>
-          </div>
+          <Spinner mensaje="Cargando inventario..." />
         ) : (
           <>
             {/* Estado de error: Alerta visual que NO bloquea el resto de la interfaz */}

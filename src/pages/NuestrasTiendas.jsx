@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import SucursalCard from '../components/SucursalCard';
+import Spinner from '../components/Spinner';
 import { esSucursalValida } from '../util/validators';
 
 export default function NuestrasTiendas() {
@@ -14,7 +15,7 @@ export default function NuestrasTiendas() {
     const controlador = new AbortController();
     const signal = controlador.signal;
 
-    fetch('data/sucursales.json', { signal: signal })
+    fetch(`${import.meta.env.BASE_URL}data/sucursales.json`, { signal: signal })
       .then((respuesta) => {
         if (!respuesta.ok) {
           throw new Error('No se pudo conectar con el servidor de sucursales');
@@ -62,10 +63,7 @@ export default function NuestrasTiendas() {
   // Renderizado condicional: Spinner de carga estilizado con Tailwind
   if (cargando) {
     return (
-      <div className="max-w-6xl mx-auto px-4 mt-20 mb-12 text-center">
-        <div className="spinner"></div>
-        <p className="text-gray-600 font-semibold text-lg">Cargando ubicaciones de tiendas...</p>
-      </div>
+      <Spinner mensaje="Cargando ubicaciones de tiendas..." />
     );
   }
 

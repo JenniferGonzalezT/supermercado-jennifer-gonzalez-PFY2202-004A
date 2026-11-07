@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { InventoryProvider } from './context/InventoryProvider';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Spinner from './components/Spinner';
 import NotFound from './pages/NotFound';
 import { rutasNavegacion } from './routes/routes.config';
 
@@ -13,7 +14,7 @@ function App() {
         <Navbar />
         
         <main className="pb-20"> 
-          <Suspense fallback={<div className="text-center mt-20">Cargando aplicación...</div>}>
+          <Suspense fallback={<Spinner mensaje="Cargando aplicación..." />}>
             <Routes>
               {/* Generación dinámica de rutas compartidas */}
               {rutasNavegacion.map((ruta) => (
