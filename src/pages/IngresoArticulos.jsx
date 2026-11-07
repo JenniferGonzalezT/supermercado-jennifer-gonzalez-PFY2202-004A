@@ -5,7 +5,7 @@ import { validarNuevoArticulo, TIPOS_PERMITIDOS } from '../util/validators';
 import { ACTIONS } from '../reducers/inventoryReducer';
 
 export default function IngresoArticulos() {
-  const { dispatch } = useInventory();
+  const { inventoryDispatch } = useInventory();
   const navigate = useNavigate();
 
   // Estados locales para los campos del formulario
@@ -43,7 +43,7 @@ export default function IngresoArticulos() {
       stock
     };
 
-    dispatch({ type: ACTIONS.ADD_PRODUCT, payload: nuevoProducto });
+    inventoryDispatch({ type: ACTIONS.ADD_PRODUCT, payload: nuevoProducto });
 
     // Mostrar éxito y resetear formulario
     setExito(true);

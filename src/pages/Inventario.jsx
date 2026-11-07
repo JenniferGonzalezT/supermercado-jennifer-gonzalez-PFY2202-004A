@@ -4,8 +4,8 @@ import { useInventory } from '../context/InventoryContext';
 import { TIPOS_PERMITIDOS } from '../util/validators';
 
 export default function Inventario() {
-  const { state } = useInventory(); 
-  const { products, loading, error } = state;
+  const { inventoryState } = useInventory();
+  const { products, loading, error } = inventoryState;
 
   // Estado local para manejar el filtro seleccionado
   const [filtroCategoria, setFiltroCategoria] = useState('Todos');
