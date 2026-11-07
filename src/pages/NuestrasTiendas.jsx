@@ -98,13 +98,7 @@ export default function NuestrasTiendas() {
         {sucursales.map((sucursal) => (
           <SucursalCard 
             key={sucursal.id}
-            nombre={sucursal.nombre}
-            direccion={sucursal.direccion}
-            telefono={sucursal.telefono}
-            horario={sucursal.horario}
-            imagen={sucursal.imagen}
-            estado={sucursal.estado}
-            estadoClase={sucursal.estadoClase}
+            sucursal={sucursal}
           />
         ))}
       </div>
