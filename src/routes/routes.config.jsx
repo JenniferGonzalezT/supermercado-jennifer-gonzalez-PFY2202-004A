@@ -6,10 +6,10 @@ import Inventario from '../pages/Inventario';
 import DetalleArticulo from '../pages/DetalleArticulo';
 
 export const rutasNavegacion = [
-  { path: '/', label: 'Inicio', element: <Home /> },
-  { path: '/quienes-somos', label: 'Quiénes Somos', element: <QuienesSomos /> },
-  { path: '/nuestras-tiendas', label: 'Nuestras Tiendas', element: <NuestrasTiendas /> },
-  { path: '/ingreso', label: 'Ingresar Artículo', element: <IngresoArticulos /> },
-  { path: '/inventario', label: 'Ver Inventario', element: <Inventario /> },
-  { path: '/detalle/:id', label: 'Detalle', element: <DetalleArticulo /> }
+  { path: '/', label: 'Inicio', element: <Home />, showInMenu: true },
+  { path: '/quienes-somos', label: 'Quiénes Somos', element: <QuienesSomos />, showInMenu: true },
+  { path: '/nuestras-tiendas', label: 'Nuestras Tiendas', element: <NuestrasTiendas />, showInMenu: true },
+  { path: '/ingreso', label: 'Ingresar Artículo', element: <IngresoArticulos />, showInMenu: true },
+  { path: '/inventario', label: 'Ver Inventario', element: <Inventario />, showInMenu: true },
+  { path: '/detalle/:id', label: 'Detalle', element: <DetalleArticulo />, showInMenu: false }
 ];

@@ -44,12 +44,14 @@ export default function Navbar() {
         
         {/* Contenedor de Enlaces */}
         <div className={`${isOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row justify-center items-center gap-x-6 gap-y-4 w-full md:w-auto mt-4 md:mt-0 transition-all`}>
-          {/* Mapeo dinámico de las rutas y se agrega un onClick para cerrar el menú móvil automáticamente al seleccionar una opción */}
-            {rutasNavegacion.map((ruta) => (
-              <NavLink 
-                key={ruta.path} 
-                to={ruta.path} 
-                className={linkClass} 
+          {/* Mapeo dinámico de las rutas filtradas y se agrega un onClick para cerrar el menú automáticamente al seleccionar una opción */}
+          {rutasNavegacion
+            .filter((ruta) => ruta.showInMenu)
+            .map((ruta) => (
+              <NavLink
+                key={ruta.path}
+                to={ruta.path}
+                className={linkClass}
                 onClick={() => setIsOpen(false)}
               >
                 {ruta.label}
