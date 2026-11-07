@@ -66,6 +66,7 @@ export default function Inventario() {
                     <th className="tabla-encabezado">Nombre</th>
                     <th className="tabla-encabezado">Marca</th>
                     <th className="tabla-encabezado">Tipo</th>
+                    <th className="tabla-encabezado">Stock</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -77,6 +78,7 @@ export default function Inventario() {
                             {product.id}
                           </Link>
                         </td>
+
                         <td className="tabla-data font-medium text-gray-900">
                           {product.nombre}
                           {/* Solo se mostrará si el producto tiene la bandera temporal de nuevo */}
@@ -86,17 +88,23 @@ export default function Inventario() {
                             </span>
                           )}
                         </td>
+
                         <td className="tabla-data text-gray-500">{product.marca}</td>
+                        
                         <td className="tabla-data text-gray-500">
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                             {product.tipo}
                           </span>
                         </td>
+
+                        <td className={`tabla-data font-bold ${product.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          {product.stock} un.
+                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="4" className="px-6 py-8 text-center text-sm text-gray-500">
+                      <td colSpan="5" className="px-6 py-8 text-center text-sm text-gray-500">
                         No se encontraron artículos en esta categoría.
                       </td>
                     </tr>
