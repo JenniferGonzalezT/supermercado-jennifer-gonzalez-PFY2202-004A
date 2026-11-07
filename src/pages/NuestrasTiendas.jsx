@@ -1,80 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import SucursalCard from '../components/SucursalCard';
 import Spinner from '../components/Spinner';
 import { esSucursalValida } from '../util/validators';
+import { useFetch } from '../hooks/useFetch';
 
 export default function NuestrasTiendas() {
-  // Estados para gestionar los datos, la carga, los errores y los reintentos
-  const [sucursales, setSucursales] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
-  const [intentos, setIntentos] = useState(0); 
+  // Llamar al custom hook pasándole la ruta exacta
+  const { data, cargando, error, reintentar } = useFetch(`${import.meta.env.BASE_URL}data/sucursales.json`);
 
-  useEffect(() => {
-    // Instanciar AbortController para cancelar la petición si el componente se desmonta
-    const controlador = new AbortController();
-    const signal = controlador.signal;
+  // Uso de useMemo para filtrar la lista solo cuando 'data' cambie, sin provocar dobles renderizados.
+  const sucursales = useMemo(() => {
+    if (!data || !Array.isArray(data)) return [];
+    return data.filter(esSucursalValida);
+  }, [data]);
 
-    fetch(`${import.meta.env.BASE_URL}data/sucursales.json`, { signal: signal })
-      .then((respuesta) => {
-        if (!respuesta.ok) {
-          throw new Error('No se pudo conectar con el servidor de sucursales');
-        }
-        return respuesta.json();
-      })
-      .then((datos) => {
-        // Validar que la respuesta sea un arreglo
-        if (!Array.isArray(datos)) {
-          throw new Error('El formato de datos recibido no es una lista válida');
-        }
-
-        // Filtrar usando la función validadora de seguridad
-        const sucursalesValidas = datos.filter(esSucursalValida);
-
-        if (sucursalesValidas.length === 0) {
-          throw new Error('Ninguna sucursal cumple con el formato requerido de seguridad');
-        }
-
-        setSucursales(sucursalesValidas);
-        setCargando(false);
-      })
-      .catch((err) => {
-        // Ignorar el error si fue provocado por el desmontaje del componente
-        if (err.name === 'AbortError') {
-          console.log('Fetch cancelado: El componente se desmontó antes de terminar la petición.');
-        } else {
-          console.error('Error al cargar sucursales:', err);
-          setError(err.message);
-          setCargando(false);
-        }
-      });
-
-    // Cleanup function
-    return () => controlador.abort();
-  }, [intentos]); 
-
-  // Función para volver a disparar el useEffect
-  const manejarReintento = () => {
-    setCargando(true);
-    setError(null);
-    setIntentos((prev) => prev + 1);
-  };
-
-  // Renderizado condicional: Spinner de carga estilizado con Tailwind
+  // Renderizado condicional de carga
   if (cargando) {
-    return (
-      <Spinner mensaje="Cargando ubicaciones de tiendas..." />
-    );
+    return <Spinner mensaje="Cargando ubicaciones de tiendas..." />;
   }
 
-  // Renderizado condicional: Mensaje de error y botón de reintento
-  if (error) {
+  // Renderizado condicional de error: Si hay error de red, o si los datos cargaron pero ninguna sucursal es válida
+  if (error || (data && sucursales.length === 0)) {
     return (
       <div className="max-w-3xl mx-auto px-4 mt-20 mb-12">
         <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm text-center">
           <p className="text-red-700 font-medium text-lg mb-4">Lo sentimos, hubo un problema al cargar las sucursales</p>
           <button 
-            onClick={manejarReintento}
+            onClick={reintentar}
             className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition-colors shadow-sm"
           >
             Reintentar conexión
@@ -84,7 +36,7 @@ export default function NuestrasTiendas() {
     );
   }
 
-  // Renderizado del catálogo principal
+  // Renderizado principal
   return (
     <div className="max-w-6xl mx-auto px-4 mt-12 mb-12">
       <h2 className="text-3xl font-bold text-color-oscuro mb-4">Nuestras Tiendas</h2>
