@@ -1,10 +1,13 @@
-import Home from '../pages/Home';
-import QuienesSomos from '../pages/QuienesSomos';
-import NuestrasTiendas from '../pages/NuestrasTiendas';
-import IngresoArticulos from '../pages/IngresoArticulos';
-import Inventario from '../pages/Inventario';
-import DetalleArticulo from '../pages/DetalleArticulo';
-import Carrito from '../pages/Carrito';
+/* eslint-disable react-refresh/only-export-components */
+import { lazy } from 'react';
+
+const Home = lazy(() => import('../pages/Home'));
+const QuienesSomos = lazy(() => import('../pages/QuienesSomos'));
+const NuestrasTiendas = lazy(() => import('../pages/NuestrasTiendas'));
+const IngresoArticulos = lazy(() => import('../pages/IngresoArticulos'));
+const Inventario = lazy(() => import('../pages/Inventario'));
+const DetalleArticulo = lazy(() => import('../pages/DetalleArticulo'));
+const Carrito = lazy(() => import('../pages/Carrito'));
 
 export const rutasNavegacion = [
   { path: '/', label: 'Inicio', element: <Home />, showInMenu: true },
