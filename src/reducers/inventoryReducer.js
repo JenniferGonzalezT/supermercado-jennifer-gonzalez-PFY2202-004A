@@ -40,8 +40,8 @@ export function inventoryReducer(state, action) {
         ...state,
         products: state.products.map(product => 
           product.id === action.payload.id 
-            ? { ...product, stock: product.stock - action.payload.cantidad } 
-            : product
+          ? { ...product, stock: Math.max(0, product.stock - action.payload.cantidad) } 
+          : product
         )
       };
     case ACTIONS.INCREASE_STOCK:

@@ -33,6 +33,10 @@ export default function DetalleArticulo() {
 
   // Manejador del botón agregar al carrito
   const handleAgregarCarrito = () => {
+    if (producto.stock <= 0) {
+      return;
+    }
+    
     cartDispatch({ type: 'ADD_ITEM', payload: producto });
     inventoryDispatch({ type: 'DECREASE_STOCK', payload: { id: producto.id, cantidad: 1 } });
     
