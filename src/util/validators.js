@@ -12,6 +12,7 @@ export const esSucursalValida = (sucursal) => {
   );
 };
 
+export const CATEGORIA_TODOS = 'Todos';
 export const TIPOS_PERMITIDOS = ["Abarrotes", "Lácteos", "Bebidas", "Limpieza", "Congelados"];
 
 export const validarNuevoArticulo = (nombre, marca, tipo, stock) => {

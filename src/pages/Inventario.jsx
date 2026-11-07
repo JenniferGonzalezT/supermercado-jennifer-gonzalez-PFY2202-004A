@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { useInventory } from '../context/InventoryContext';
-import { TIPOS_PERMITIDOS } from '../util/validators';
+import { TIPOS_PERMITIDOS, CATEGORIA_TODOS } from '../util/validators';
 
 export default function Inventario() {
   const { inventoryState } = useInventory();
   const { products, loading, error } = inventoryState;
 
   // Estado local para manejar el filtro seleccionado
-  const [filtroCategoria, setFiltroCategoria] = useState('Todos');
+  const [filtroCategoria, setFiltroCategoria] = useState(CATEGORIA_TODOS);
 
   // Filtrado dinámico sin modificar los datos originales
-  const productosFiltrados = filtroCategoria === 'Todos' 
+  const productosFiltrados = filtroCategoria === CATEGORIA_TODOS 
     ? products 
     : products.filter(product => product.tipo === filtroCategoria);
 
@@ -50,7 +50,7 @@ export default function Inventario() {
                 onChange={(e) => setFiltroCategoria(e.target.value)}
                 className="ml-4 block w-64 rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
               >
-                <option value="Todos">Todas las categorías</option>
+                <option value={CATEGORIA_TODOS}>Todas las categorías</option>
                 {TIPOS_PERMITIDOS.map(categoria => (
                   <option key={categoria} value={categoria}>
                     {categoria}
