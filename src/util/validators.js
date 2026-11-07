@@ -51,3 +51,15 @@ export const validarNuevoArticulo = (nombre, marca, tipo, stock) => {
 
   return { esValido: true, mensaje: "" };
 };
+
+export const esProductoValido = (producto) => {
+  return (
+    producto &&
+    (typeof producto.id === 'string') &&
+    typeof producto.nombre === 'string' &&
+    typeof producto.marca === 'string' &&
+    typeof producto.tipo === 'string' &&
+    typeof producto.stock === 'number' &&
+    producto.stock >= 0
+  );
+};
