@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useInventory } from '../context/InventoryContext';
 import { useNavigate } from 'react-router';
 import { validarNuevoArticulo, TIPOS_PERMITIDOS } from '../util/validators';
+import { ACTIONS } from '../reducers/inventoryReducer';
 
 export default function IngresoArticulos() {
-  const { addProduct } = useInventory();
+  const { dispatch } = useInventory();
   const navigate = useNavigate();
 
   // Estados locales para los campos del formulario
@@ -32,13 +33,17 @@ export default function IngresoArticulos() {
       return;
     }
 
-    // Si pasa la validación, enviamos los datos limpios al estado global
-    addProduct({ 
+    // Construir el objeto completo
+    const nuevoProducto = {
+      id: crypto.randomUUID(),
+      isNew: true,
       nombre: nombre.trim(), 
       marca: marca.trim(), 
       tipo,
       stock
-    });
+    };
+
+    dispatch({ type: ACTIONS.ADD_PRODUCT, payload: nuevoProducto });
 
     // Mostrar éxito y resetear formulario
     setExito(true);

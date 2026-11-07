@@ -2,7 +2,9 @@
 export const ACTIONS = {
   ADD_PRODUCT: 'ADD_PRODUCT',
   LOAD_PRODUCTS: 'LOAD_PRODUCTS',
-  SET_ERROR: 'SET_ERROR'
+  SET_ERROR: 'SET_ERROR',
+  DECREASE_STOCK: 'DECREASE_STOCK',
+  INCREASE_STOCK: 'INCREASE_STOCK'
 };
 
 // Estado inicial: Lista vacía e indicadores de carga y error
@@ -32,6 +34,24 @@ export function inventoryReducer(state, action) {
         ...state,
         loading: false,
         error: action.payload
+      };
+    case ACTIONS.DECREASE_STOCK:
+      return {
+        ...state,
+        products: state.products.map(product => 
+          product.id === action.payload.id 
+            ? { ...product, stock: product.stock - action.payload.cantidad } 
+            : product
+        )
+      };
+    case ACTIONS.INCREASE_STOCK:
+      return {
+        ...state,
+        products: state.products.map(product => 
+          product.id === action.payload.id 
+            ? { ...product, stock: product.stock + action.payload.cantidad } 
+            : product
+        )
       };
     default:
       return state;

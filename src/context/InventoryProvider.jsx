@@ -21,18 +21,8 @@ export function InventoryProvider({ children }) {
       });
   }, []);
 
-  // Función de ayuda para despachar la acción más fácilmente
-  const addProduct = (product) => {
-    const newProduct = { 
-      id: crypto.randomUUID(), 
-      isNew: true, 
-      ...product 
-    };
-    dispatch({ type: ACTIONS.ADD_PRODUCT, payload: newProduct });
-  };
-
   return (
-    <InventoryContext.Provider value={{ state, addProduct }}>
+    <InventoryContext.Provider value={{ state, dispatch }}>
       {children}
     </InventoryContext.Provider>
   );
