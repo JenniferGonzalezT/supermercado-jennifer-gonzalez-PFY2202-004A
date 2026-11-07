@@ -25,7 +25,7 @@ export default function Inventario() {
         {/* Estado de carga: Muestra un spinner mientras fetch hace su trabajo */}
         {loading ? (
           <div className="text-center py-10">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-acento-verdoso mx-auto mb-4"></div>
+            <div className="spinner"></div>
             <p className="text-gray-600 font-semibold">Cargando inventario...</p>
           </div>
         ) : (

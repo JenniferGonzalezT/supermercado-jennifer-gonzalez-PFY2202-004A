@@ -44,4 +44,9 @@
   .tabla-data {
     @apply px-6 py-4 whitespace-nowrap text-sm;
   }
+
+  /* Spinner de carga */
+  .spinner {
+    @apply animate-spin rounded-full h-12 w-12 border-b-4 border-acento-verdoso mx-auto mb-4;
+  }
 }

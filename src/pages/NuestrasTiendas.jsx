@@ -63,7 +63,7 @@ export default function NuestrasTiendas() {
   if (cargando) {
     return (
       <div className="max-w-6xl mx-auto px-4 mt-20 mb-12 text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-acento-verdoso mx-auto mb-4"></div>
+        <div className="spinner"></div>
         <p className="text-gray-600 font-semibold text-lg">Cargando ubicaciones de tiendas...</p>
       </div>
     );
