@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useInventory } from '../context/InventoryContext';
 import { useNavigate } from 'react-router';
 import { validarNuevoArticulo, TIPOS_PERMITIDOS } from '../util/validators';
@@ -17,6 +17,18 @@ export default function IngresoArticulos() {
   // Estados para alertas visuales de seguridad
   const [error, setError] = useState('');
   const [exito, setExito] = useState(false);
+
+  // useRef para guardar la referencia del temporizador sin causar re-renderizados
+  const timerRef = useRef(null);
+
+  // useEffect para limpiar el temporizador
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,8 +64,8 @@ export default function IngresoArticulos() {
     setTipo('');
     setStock(10);
 
-    // Redirigir a la tabla después de 2.5 segundos para ver mensaje
-    setTimeout(() => {
+    // Guardar el ID del timeout en la referencia para redirigir a la tabla después de 2.5 segundos
+    timerRef.current = setTimeout(() => {
       navigate('/inventario');
     }, 2500);
   };
