@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router';
 import { useInventory } from '../context/InventoryContext';
 import { TIPOS_PERMITIDOS } from '../util/validators';
 
@@ -73,7 +74,11 @@ export default function Inventario() {
                   {productosFiltrados && productosFiltrados.length > 0 ? (
                     productosFiltrados.map((product) => (
                       <tr key={product.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <Link to={`/detalle/${product.id}`} className="text-acento-verdoso hover:text-acento-hover hover:underline">
+                            {product.id}
+                          </Link>
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {product.nombre}
                           {/* Solo se mostrará si el producto tiene la bandera temporal de nuevo */}
