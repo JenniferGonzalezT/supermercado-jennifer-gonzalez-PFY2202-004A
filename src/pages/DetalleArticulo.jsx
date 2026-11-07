@@ -47,7 +47,7 @@ export default function DetalleArticulo() {
   };
 
   return (
-    <div className="relative min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8">
+    <div className="page-container">
       
       {/* Notificación flotante (Toast) */}
       {showToast && (
@@ -80,10 +80,10 @@ export default function DetalleArticulo() {
         <button 
           onClick={handleAgregarCarrito}
           disabled={producto.stock <= 0}
-          className={`w-full py-3 px-4 rounded-md shadow-sm text-white font-bold transition-colors ${
+          className={`btn-primario ${
             producto.stock > 0 
               ? 'bg-acento-verdoso hover:bg-acento-hover' 
-              : 'bg-gray-400 cursor-not-allowed'
+              : 'bg-gray-400 hover:bg-gray-400 cursor-not-allowed'
           }`}
         >
           {producto.stock > 0 ? 'Agregar al Carrito (1 un.)' : 'Sin Stock'}

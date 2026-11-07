@@ -19,7 +19,7 @@ export default function Home() {
         
         <Link 
           to="/inventario" 
-          className="inline-block px-8 py-3 bg-acento-verdoso hover:bg-acento-hover text-white text-lg font-semibold rounded-lg transition-colors shadow-sm"
+          className="btn-primario"
         >
           Revisar Stock Actual
         </Link>

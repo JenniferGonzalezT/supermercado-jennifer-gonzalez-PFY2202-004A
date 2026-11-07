@@ -37,7 +37,7 @@ export default function Carrito() {
   const totalUnidades = cartState.reduce((total, item) => total + item.cantidad, 0);
 
   return (
-    <div className="relative min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8">
+    <div className="page-container">
       
       {/* Toast Flotante Reutilizable */}
       {toastInfo.show && (
@@ -56,7 +56,7 @@ export default function Carrito() {
             <p className="text-xl text-gray-500 mb-6">Tu carrito está vacío.</p>
             <button 
               onClick={() => navigate('/inventario')}
-              className="px-6 py-3 bg-acento-verdoso text-white font-bold rounded-md hover:bg-acento-hover transition"
+              className="btn-primario"
             >
               Ir al Inventario
             </button>
@@ -78,7 +78,7 @@ export default function Carrito() {
                       {/* Disminuir cantidad */}
                       <button 
                         onClick={() => handleDisminuir(item)}
-                        className="w-10 h-10 rounded-full bg-red-100 text-red-600 font-bold hover:bg-red-200 transition flex justify-center items-center"
+                        className="btn-circulo bg-red-100 text-red-600 hover:bg-red-200"
                       >
                         -
                       </button>
@@ -89,7 +89,7 @@ export default function Carrito() {
                       <button 
                         onClick={() => handleAumentar(item, stockReal)} 
                         disabled={stockReal <= 0} 
-                        className={`w-10 h-10 rounded-full font-bold transition flex justify-center items-center ${
+                        className={`btn-circulo  ${
                           stockReal > 0 
                             ? 'bg-green-100 text-green-600 hover:bg-green-200' 
                             : 'bg-gray-100 text-gray-400 cursor-not-allowed'

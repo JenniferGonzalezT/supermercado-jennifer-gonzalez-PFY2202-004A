@@ -59,67 +59,67 @@ export default function IngresoArticulos() {
   };
 
   return (
-    <div className="min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
+    <div className="page-container">
+      <div className="max-w-md card-container">
         <h2 className="text-2xl font-bold text-center text-color-oscuro mb-6">Ingreso de Nuevo Artículo</h2>
         
         {/* Alerta de Error */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm font-medium rounded-r-md">
+          <div className="alerta-form bg-red-50 border-red-500 text-red-700">
             {error}
           </div>
         )}
 
         {/* Alerta de Éxito */}
         {exito && (
-          <div className="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 text-sm font-medium rounded-r-md">
+          <div className="alerta-form bg-green-50 border-green-500 text-green-700">
             ¡Artículo agregado! Redirigiendo a inventario...
           </div>
         )}
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Nombre del Producto</label>
+            <label className="label-form">Nombre del Producto</label>
             <input 
               type="text" 
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
+              className="input-form"
               placeholder="Ej. Arroz Grado 1"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Marca</label>
+            <label className="label-form">Marca</label>
             <input 
               type="text" 
               value={marca}
               onChange={(e) => setMarca(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
+              className="input-form"
               placeholder="Ej. Tucapel"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Stock Inicial</label>
+            <label className="label-form">Stock Inicial</label>
             <input
               type="number"
               value={stock}
               onChange={(e) => setStock(Number(e.target.value))}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
+              className="input-form"
               min="0"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Tipo de Producto</label>
+            <label className="label-form">Tipo de Producto</label>
             <select 
               value={tipo}
               onChange={(e) => setTipo(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border"
+              className="input-form"
               required
             >
               <option value="">Seleccione un tipo...</option>
@@ -133,7 +133,7 @@ export default function IngresoArticulos() {
 
           <button 
             type="submit" 
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-acento-verdoso hover:bg-acento-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-acento-verdoso transition-colors"
+            className="btn-primario"
           >
             Agregar al Inventario
           </button>

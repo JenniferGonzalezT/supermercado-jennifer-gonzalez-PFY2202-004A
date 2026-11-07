@@ -16,7 +16,7 @@ export default function Inventario() {
     : products.filter(product => product.tipo === filtroCategoria);
 
   return (
-    <div className="min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8">
+    <div className="page-container">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold text-center text-color-oscuro mb-8">
           Inventario Actual de Artículos
@@ -64,22 +64,22 @@ export default function Inventario() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Marca</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                    <th className="tabla-encabezado">ID</th>
+                    <th className="tabla-encabezado">Nombre</th>
+                    <th className="tabla-encabezado">Marca</th>
+                    <th className="tabla-encabezado">Tipo</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {productosFiltrados && productosFiltrados.length > 0 ? (
                     productosFiltrados.map((product) => (
                       <tr key={product.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <td className="tabla-data font-medium">
                           <Link to={`/detalle/${product.id}`} className="text-acento-verdoso hover:text-acento-hover hover:underline">
                             {product.id}
                           </Link>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td className="tabla-data font-medium text-gray-900">
                           {product.nombre}
                           {/* Solo se mostrará si el producto tiene la bandera temporal de nuevo */}
                           {product.isNew && (
@@ -88,8 +88,8 @@ export default function Inventario() {
                             </span>
                           )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.marca}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="tabla-data text-gray-500">{product.marca}</td>
+                        <td className="tabla-data text-gray-500">
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                             {product.tipo}
                           </span>

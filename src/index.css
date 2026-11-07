@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  /* Botón general */
+  .btn-primario {
+    @apply w-full flex justify-center py-3 px-4 rounded-md shadow-sm text-white font-bold bg-acento-verdoso hover:bg-acento-hover transition-colors;
+  }
+
+  /* Contenedor principal de las pantallas */
+  .page-container {
+    @apply min-h-screen bg-color-claro py-12 px-4 sm:px-6 lg:px-8 relative;
+  }
+
+  /* Tarjetas y contenedores blancos */
+  .card-container {
+    @apply bg-white rounded-xl shadow-md overflow-hidden p-8 mx-auto;
+  }
+
+  /* Alerta (base), Input y Label de formularios */
+  .alerta-form {
+    @apply mb-6 p-4 border-l-4 text-sm font-medium rounded-r-md;
+  }
+
+  .input-form {
+    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-acento-verdoso focus:ring focus:ring-acento-verdoso focus:ring-opacity-50 p-2 border;
+  }
+
+  .label-form {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  /* Base para botones circulares de acción (+/-) */
+  .btn-circulo {
+    @apply w-10 h-10 rounded-full font-bold transition flex justify-center items-center;
+  }
+
+  /* Tabla */
+  .tabla-encabezado {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+  }
+
+  .tabla-data {
+    @apply px-6 py-4 whitespace-nowrap text-sm;
+  }
+}
